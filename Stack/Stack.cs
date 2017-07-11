@@ -14,14 +14,16 @@ namespace Stack
 
         public Stack(int StackSize)
         {
+            if (StackSize <= 0) throw new ArgumentException("The stack's size cannot be 0 or lower");
             Size = 0;
             this.StackSize = StackSize;
             stackyStack = new T[StackSize];
+            
         }
 
         public void push(T newData)
         {
-            if (Size + 1 != StackSize)
+            if (Size + 1 <= StackSize)
             {
                 stackyStack[Size] = newData;
                 Size++;

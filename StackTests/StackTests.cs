@@ -18,6 +18,13 @@ namespace Stack.Tests
             Assert.IsNotNull(testStack);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "The stack's size cannot be 0 or lower")]
+        public void StackTestNull()
+        {
+            Stack<int> testStack = new Stack<int>(0);
+        }
+
         [TestMethod()]
         public void pushTestOneElement()
         {
@@ -151,18 +158,44 @@ namespace Stack.Tests
         }
 
         [TestMethod()]
+        public void getUsedSizeTestFullStack()
+        {
+            Stack<int> testStack = new Stack<int>(5);
+            testStack.push(4);
+            testStack.push(21);
+            testStack.push(4);
+            testStack.push(3);
+            testStack.push(2);
+            Assert.AreEqual(5, testStack.getUsedSize());
+        }
+
+        [TestMethod()]
         public void getFreeSpacesTestEmptyStack()
         {
             Stack<int> testStack = new Stack<int>(5);
             Assert.AreEqual(5, testStack.getFreeSpaces());
         }
 
-        /*to do full and filled
-         * [TestMethod()]
+        [TestMethod()]
+        public void getFreeSpacesTestAlmostFullStack()
+        {
+            Stack<int> testStack = new Stack<int>(5);
+            testStack.push(4);
+            testStack.push(21);
+            testStack.push(2);
+            Assert.AreEqual(2, testStack.getFreeSpaces());
+        }
+
+        [TestMethod()]
         public void getFreeSpacesTestFullStack()
         {
             Stack<int> testStack = new Stack<int>(5);
-            Assert.AreEqual(5, testStack.getFreeSpaces());
-        }*/
+            testStack.push(4);
+            testStack.push(21);
+            testStack.push(4);
+            testStack.push(3);
+            testStack.push(2);
+            Assert.AreEqual(0, testStack.getFreeSpaces());
+        }
     }
 }
